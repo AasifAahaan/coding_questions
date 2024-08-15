@@ -66,14 +66,14 @@ console.log("Ans. Promises are objects that represent the eventual completion (o
 
 const promise = new Promise((resolve, reject) => {
   const randomNumber = Math.random();
-  
+
   setTimeout(() => {
     if (randomNumber > 0.5) {
       resolve("Success!");
     } else if (randomNumber > 0.2) {
       reject("Failure!");
     } else {
-      console.log("Still pending...");
+      reject("Rejected due to timeout!");
     }
   }, 1000);
 });
@@ -86,3 +86,28 @@ promise
     console.log({ state: "Rejected", error });
   });
 
+
+console.log("......................... Reverse String ....................................")
+
+function reverseString(string) {
+  let reverse = '';
+  for (let i = string.length - 1; i >= 0; i--) {
+    reverse += string[i];
+  }
+  return reverse
+}
+
+const givenString = reverseString("Aasif")
+console.log({ givenString })
+
+console.log("......................... Using Recursion ....................................")
+
+function reverseStrings(str) {
+  if (str === "") {
+    return "";
+  } else {
+    return reverseString(str.substr(1)) + str[0];
+  }
+}
+
+console.log(reverseStrings("Hello"))
