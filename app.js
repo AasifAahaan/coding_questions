@@ -64,50 +64,112 @@ console.log(increment())
 console.log("3. What are promises, and how do they work?")
 console.log("Ans. Promises are objects that represent the eventual completion (or failure) of an asynchronous operation. They have three states: pending, fulfilled, and rejected.")
 
-const promise = new Promise((resolve, reject) => {
-  const randomNumber = Math.random();
+// const promise = new Promise((resolve, reject) => {
+//   const randomNumber = Math.random();
 
-  setTimeout(() => {
-    if (randomNumber > 0.5) {
-      resolve("Success!");
-    } else if (randomNumber > 0.2) {
-      reject("Failure!");
-    } else {
-      reject("Rejected due to timeout!");
-    }
-  }, 1000);
-});
+//   setTimeout(() => {
+//     if (randomNumber > 0.5) {
+//       resolve("Success!");
+//     } else if (randomNumber > 0.2) {
+//       reject("Failure!");
+//     } else {
+//       reject("Rejected due to timeout!");
+//     }
+//   }, 1000);
+// });
 
-promise
-  .then(result => {
-    console.log({ state: "Fulfilled", result });
-  })
-  .catch(error => {
-    console.log({ state: "Rejected", error });
+// promise
+//   .then(result => {
+//     console.log({ state: "Fulfilled", result });
+//   })
+//   .catch(error => {
+//     console.log({ state: "Rejected", error });
+//   });
+
+
+// console.log("......................... Reverse String ....................................")
+
+// function reverseString(string) {
+//   let reverse = '';
+//   for (let i = string.length - 1; i >= 0; i--) {
+//     reverse += string[i];
+//   }
+//   return reverse
+// }
+
+// const givenString = reverseString("Aasif")
+// console.log({ givenString })
+
+// console.log("......................... Using Recursion ....................................")
+
+// function reverseStrings(str) {
+//   if (str === "") {
+//     return "";
+//   } else {
+//     return reverseString(str.substr(1)) + str[0];
+//   }
+// }
+
+// console.log(reverseStrings("Hello"))
+
+// for (var i = 0; i < 4; i++) {
+//   setTimeout(function () {
+//     console.log(i)
+//   }, i * 1000)
+// }
+
+// =========================================== Anagram string ===========================================
+// function areAnagrams(str1, str2) {
+//   str1 = str1.toLowerCase().replace(/[^a-z0-9]/g, '');
+//   str2 = str2.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+//   if (str1.length !== str2.length) {
+//     return false;
+//   }
+
+//   let sortedStr1 = str1.split('').sort().join('');
+//   let sortedStr2 = str2.split('').sort().join('');
+
+//   return sortedStr1 === sortedStr2;
+// }
+
+// console.log(areAnagrams('READ', 'DEAR')); 
+// console.log(areAnagrams('MARY', 'ARMY')); 
+// console.log(areAnagrams('HELLO', 'WORLD'));
+// console.log(areAnagrams('AASIF', 'FISAA')); 
+
+
+// const myArray = ["Pineapple", "Pomegrate", "Banana", "Apple"]
+// myArray.splice(2, 0, "guvava", "Lemom")
+
+// console.log(myArray)
+
+function sortStudents(students, sortOrder) {
+  students.sort((a, b) => {
+    return sortOrder.indexOf(a.role) - sortOrder.indexOf(b.role);
   });
-
-
-console.log("......................... Reverse String ....................................")
-
-function reverseString(string) {
-  let reverse = '';
-  for (let i = string.length - 1; i >= 0; i--) {
-    reverse += string[i];
-  }
-  return reverse
+  return students;
 }
 
-const givenString = reverseString("Aasif")
-console.log({ givenString })
+var students = [
+  { id: 5, role: "manager" },
+  { id: 2, role: "developer" },
+  { id: 4, role: "developer" },
+  { id: 3, role: "tester" },
+  { id: 1, role: "tester" }
+];
 
-console.log("......................... Using Recursion ....................................")
+var sortOrder = ['tester', 'developer', 'manager'];
 
-function reverseStrings(str) {
-  if (str === "") {
-    return "";
-  } else {
-    return reverseString(str.substr(1)) + str[0];
-  }
+
+
+var sortedStudents = sortStudents(students, sortOrder);
+console.log(sortedStudents);
+
+function sortBinaryArray(arr) {
+  return arr.sort((a, b) => a - b);
 }
 
-console.log(reverseStrings("Hello"))
+var inputArray = [0, 1, 1, 1, 0, 0, 1, 0];
+var sortedArray = sortBinaryArray(inputArray);
+console.log(sortedArray);
