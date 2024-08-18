@@ -119,6 +119,7 @@ console.log("Ans. Promises are objects that represent the eventual completion (o
 // }
 
 // =========================================== Anagram string ===========================================
+
 // function areAnagrams(str1, str2) {
 //   str1 = str1.toLowerCase().replace(/[^a-z0-9]/g, '');
 //   str2 = str2.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -138,38 +139,125 @@ console.log("Ans. Promises are objects that represent the eventual completion (o
 // console.log(areAnagrams('HELLO', 'WORLD'));
 // console.log(areAnagrams('AASIF', 'FISAA')); 
 
+// ======================================================================================
 
 // const myArray = ["Pineapple", "Pomegrate", "Banana", "Apple"]
 // myArray.splice(2, 0, "guvava", "Lemom")
 
 // console.log(myArray)
 
-function sortStudents(students, sortOrder) {
-  students.sort((a, b) => {
-    return sortOrder.indexOf(a.role) - sortOrder.indexOf(b.role);
-  });
-  return students;
-}
+// ======================================================================================
 
-var students = [
-  { id: 5, role: "manager" },
-  { id: 2, role: "developer" },
-  { id: 4, role: "developer" },
-  { id: 3, role: "tester" },
-  { id: 1, role: "tester" }
-];
+// function sortStudents(students, sortOrder) {
+//   students.sort((a, b) => {
+//     return sortOrder.indexOf(a.role) - sortOrder.indexOf(b.role);
+//   });
+//   return students;
+// }
 
-var sortOrder = ['tester', 'developer', 'manager'];
+// var students = [
+//   { id: 5, role: "manager" },
+//   { id: 2, role: "developer" },
+//   { id: 4, role: "developer" },
+//   { id: 3, role: "tester" },
+//   { id: 1, role: "tester" }
+// ];
 
+// var sortOrder = ['tester', 'developer', 'manager'];
+// var sortedStudents = sortStudents(students, sortOrder);
+// console.log(sortedStudents);
 
+// ======================================================================================
 
-var sortedStudents = sortStudents(students, sortOrder);
-console.log(sortedStudents);
+// function sortBinaryArray(arr) {
+//   return arr.sort((a, b) => a - b);
+// }
 
-function sortBinaryArray(arr) {
-  return arr.sort((a, b) => a - b);
-}
+// var inputArray = [0, 1, 1, 1, 0, 0, 1, 0];
+// var sortedArray = sortBinaryArray(inputArray);
+// console.log(sortedArray);
 
-var inputArray = [0, 1, 1, 1, 0, 0, 1, 0];
-var sortedArray = sortBinaryArray(inputArray);
-console.log(sortedArray);
+// ======================================================================================
+
+// function removeDuplicates(arr) {
+//   return arr.filter((item, index) => arr.indexOf(item) === index);
+// }
+
+// var inputArray = [0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 1, 1, 8];
+// const value = removeDuplicates(inputArray)
+// console.log({ value })
+
+// ======================================================================================
+
+// function isAnagram(str1, str2) {
+//   const sortedStr1 = str1.split('').sort().join('');
+//   const sortedStr2 = str2.split('').sort().join('');
+//   return sortedStr1 === sortedStr2;
+// }
+
+// const string1 = "AASIF"
+// const string2 = "FISAA"
+// const data = isAnagram(string1, string2)
+// console.log({ data })
+
+// ======================================================================================
+
+// function secondSmallest(arr) {
+//   const sortedArr = arr.sort((a, b) => a - b);
+//   return sortedArr[1];
+// }
+
+// var inputArray = [8, 0, 2, 3, 4, 5,];
+// const value = secondSmallest(inputArray)
+// console.log({ value })
+
+// ======================================================================================
+
+// function findMaxNumber(arr) {
+//   let max = arr[0];
+//   for (let i = 1; i < arr.length; i++) {
+//     if (arr[i] > max) {
+//       max = arr[i];
+//     }
+//   }
+//   return max;
+// }
+
+// var inputArray = [4, 5, 8, 0, 2, 3];
+// const value = findMaxNumber(inputArray)
+// console.log({ value })
+
+// ======================================================================================
+
+// function sortStrings(arr) {
+//   return arr.slice().sort();
+// }
+// const stringArray = ["Apple", "Pineapple", "Aanabella", "Banana"]
+// const str = sortStrings(stringArray)
+// console.log({ str })
+
+// ======================================================================================
+
+// function findSecondLargest(arr) {
+//   arr.sort((a, b) => b - a);
+//   return arr[1];
+// }
+
+// var inputArray = [4, 5, 8, 0, 2, 3];
+// const value = findSecondLargest(inputArray)
+// console.log({ value })
+
+// ======================================================================================
+
+// How do you remove an element from an array at a specific index?
+
+// let arr = [1, 2, 3];
+// arr.splice(2, 1);
+// console.log(arr); // [1, 2]
+
+// ======================================================================================
+// console.log('hello' - 'world'); // NaN
+// console.log('hello' + 'world'); // helloworld
+// console.log('hello'.length); // 5
+// console.log('hello' === 'Hello'); // false
+// console.log('hello'.indexOf('l')); // 2
