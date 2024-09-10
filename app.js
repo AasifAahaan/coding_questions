@@ -1,263 +1,265 @@
-const express = require('express');
-const createError = require('http-errors');
-const morgan = require('morgan');
-require('dotenv').config();
+const findLongestWords = (sentence) => {
+    const words = sentence.split(' ')
+    let longest = '';
 
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(morgan('dev'));
-
-app.get('/', async (req, res, next) => {
-  res.send({ message: 'Awesome it works 🐻' });
-});
-
-app.use('/api', require('./routes/api.route'));
-
-app.use((req, res, next) => {
-  next(createError.NotFound());
-});
-
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.send({
-    status: err.status || 500,
-    message: err.message,
-  });
-});
-
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀 @ http://localhost:${PORT}`));
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Coding Questions >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-console.log("1. What are higher - order functions in JavaScript ?")
-console.log("Ans. Higher-order functions are functions that can take other functions as arguments, return a function, or both.")
-
-function withLogging(fn) {
-  return function (...args) {
-    console.log("Calling function with args:", args)
-    return fn(...args)
-  }
+    for (let word of words) {
+        if (word.length > longest.length) {
+            longest = word;
+        }
+    }
+    return longest
 }
 
-const add = (a, b) => a + b;
-const addLogging = withLogging(add)
-console.log(addLogging(2, 3))
+console.log(findLongestWords("The Tracing Objects are used for a set of categories to enable and disable the tracing")) // categories
 
-console.log("2. What are closures in JavaScript?")
-console.log("Ans. A closure is a function that has access to its own scope, the scope of the outer function, and the global scope. It retains access to the outer function’s variables even after the outer function has returned.")
 
-function outer() {
-  let counter = 0;
-  return function () {
-    counter++;
-    return counter
-  }
+// with reverse method... 
+const isPalindrome = (string) => {
+    const palindromeString = string.split('').reverse().join('');
+    return string === palindromeString;
 }
 
-const increment = outer();
-console.log(increment())
-console.log(increment())
+console.log(isPalindrome("Hello")) // false
+console.log(isPalindrome("MAM")) // true
 
-console.log("3. What are promises, and how do they work?")
-console.log("Ans. Promises are objects that represent the eventual completion (or failure) of an asynchronous operation. They have three states: pending, fulfilled, and rejected.")
+// without reverse method... 
+const isPalindromeString = (string) => {
+    let start = 0;
+    let end = string.length - 1;
 
-// const promise = new Promise((resolve, reject) => {
-//   const randomNumber = Math.random();
+    while (start < end) {
+        if (string[start] !== string[end]) {
+            return false;
+        }
+        start++;
+        end--;
+    }
+    return true
+}
 
-//   setTimeout(() => {
-//     if (randomNumber > 0.5) {
-//       resolve("Success!");
-//     } else if (randomNumber > 0.2) {
-//       reject("Failure!");
-//     } else {
-//       reject("Rejected due to timeout!");
-//     }
-//   }, 1000);
-// });
+console.log("WITHOUT REVERSE METHOD...", isPalindromeString("MAM")) // true
+console.log("WITHOUT REVERSE METHOD...", isPalindromeString("AasifAahaan")) // false
 
-// promise
-//   .then(result => {
-//     console.log({ state: "Fulfilled", result });
-//   })
-//   .catch(error => {
-//     console.log({ state: "Rejected", error });
-//   });
+// remove dupicate Elements from an array using Set method 
+const removeDuplicateElement = (element) => {
+    return [... new Set(element)]
+}
+
+console.log("LINE NO 48", removeDuplicateElement([1, 2, 2, 3, 3, 3, 4, 4, 5, 5])) // 1, 2, 3, 4, 5
 
 
-// console.log("......................... Reverse String ....................................")
+// remove dupicate Elements from an array without using Set method 
 
-// function reverseString(string) {
-//   let reverse = '';
-//   for (let i = string.length - 1; i >= 0; i--) {
-//     reverse += string[i];
-//   }
-//   return reverse
-// }
+const removeDuplicateElementFromArray = (element) => {
+    let uniqueElements = [];
 
-// const givenString = reverseString("Aasif")
-// console.log({ givenString })
+    for (i = 0; i < element.length; i++) {
+        if (!uniqueElements.includes(element[i])) {
+            uniqueElements.push(element[i]);
+        }
+    }
+    return uniqueElements;
+}
 
-// console.log("......................... Using Recursion ....................................")
+console.log("LINE NO 64", removeDuplicateElementFromArray([1, 2, 2, 3, 3, 3, 4, 4, 5, 5])) // 1, 2, 3, 4, 5
 
-// function reverseStrings(str) {
-//   if (str === "") {
-//     return "";
-//   } else {
-//     return reverseString(str.substr(1)) + str[0];
-//   }
-// }
+// reverse string without reverse method
 
-// console.log(reverseStrings("Hello"))
+const reverseString = (string) => {
+    let reverseStr = '';
+    for (i = string.length - 1; i >= 0; i--) {
+        // console.log(string[i])
+        // reverseStr = reverseStr + string[i]
+        reverseStr += string[i]
+    }
+    return reverseStr;
+}
 
-// for (var i = 0; i < 4; i++) {
-//   setTimeout(function () {
-//     console.log(i)
-//   }, i * 1000)
-// }
+console.log("LINE NO 78", reverseString("Aasif")) // fisaA
 
-// =========================================== Anagram string ===========================================
+// reverse string with reverse method
 
-// function areAnagrams(str1, str2) {
-//   str1 = str1.toLowerCase().replace(/[^a-z0-9]/g, '');
-//   str2 = str2.toLowerCase().replace(/[^a-z0-9]/g, '');
+console.log("LINE NO 82", "Aasif".split('').reverse().join('')) // fisaA
 
-//   if (str1.length !== str2.length) {
-//     return false;
-//   }
+// find the max count of consecutive 1's in an array...
+const findConsecutiveNumber = (numbers) => {
+    let maxCount = 0, count = 0;
+    for (let num of numbers) {
+        if (num === 1) {
+            count++;
+            maxCount = Math.max(maxCount, count)
+        }
+        else {
+            count = 0;
+        }
+    }
+    return maxCount;
+}
 
-//   let sortedStr1 = str1.split('').sort().join('');
-//   let sortedStr2 = str2.split('').sort().join('');
 
-//   return sortedStr1 === sortedStr2;
-// }
+console.log(findConsecutiveNumber([1, 1, 0, 1, 1, 1, 1, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1])) // 9
 
-// console.log(areAnagrams('READ', 'DEAR')); 
-// console.log(areAnagrams('MARY', 'ARMY')); 
-// console.log(areAnagrams('HELLO', 'WORLD'));
-// console.log(areAnagrams('AASIF', 'FISAA')); 
+// Merge two array and sort them... with sort method
 
-// ======================================================================================
+const mergeAndSort = (arr1, arr2) => {
+    return arr1.concat(arr2).sort((a, b) => a - b)
+}
 
-// const myArray = ["Pineapple", "Pomegrate", "Banana", "Apple"]
-// myArray.splice(2, 0, "guvava", "Lemom")
+console.log("LINE NO 108", mergeAndSort([0, 3, 5, 7], [9, 4, 6, 1]))
 
-// console.log(myArray)
 
-// ======================================================================================
+// without sort method... 
 
-// function sortStudents(students, sortOrder) {
-//   students.sort((a, b) => {
-//     return sortOrder.indexOf(a.role) - sortOrder.indexOf(b.role);
-//   });
-//   return students;
-// }
+const mergeAndSortArray = (arr1, arr2) => {
+    const merge = arr1.concat(arr2);
+    let n = merge.length;
 
-// var students = [
-//   { id: 5, role: "manager" },
-//   { id: 2, role: "developer" },
-//   { id: 4, role: "developer" },
-//   { id: 3, role: "tester" },
-//   { id: 1, role: "tester" }
-// ];
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1 - i; j++) {
+            if (merge[j] > merge[j + 1]) {
+                let temp = merge[j + 1];
+                merge[j + 1] = merge[j]
+                temp = merge[j + 1]
+            }
+        }
+    }
+    return merge
+}
 
-// var sortOrder = ['tester', 'developer', 'manager'];
-// var sortedStudents = sortStudents(students, sortOrder);
-// console.log(sortedStudents);
+console.log("LINE NO 128", mergeAndSortArray([0, 3, 5, 7], [9, 4, 6, 1]))
 
-// ======================================================================================
+// check if every value in arr1 has its crossponding squared value in arr2 
 
-// function sortBinaryArray(arr) {
-//   return arr.sort((a, b) => a - b);
-// }
+function checkSquared(arr1, arr2) {
+    const arr1Squared = arr1.map((num) => num * num);
+    arr1Squared.sort((a, b) => a - b)
+    arr2.sort((a, b) => a - b)
+    return JSON.stringify(arr1Squared) === JSON.stringify(arr2)
+}
 
-// var inputArray = [0, 1, 1, 1, 0, 0, 1, 0];
-// var sortedArray = sortBinaryArray(inputArray);
-// console.log(sortedArray);
+console.log(checkSquared([1, 2, 3, 4], [1, 4, 9, 16])) // true
+console.log(checkSquared([1, 2, 3, 4], [1, 4, 9, 15])) // false
 
-// ======================================================================================
 
-// function removeDuplicates(arr) {
-//   return arr.filter((item, index) => arr.indexOf(item) === index);
-// }
+// get unique object from an array... 
 
-// var inputArray = [0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 1, 1, 8];
-// const value = removeDuplicates(inputArray)
-// console.log({ value })
+function getUniqueObject(input) {
+    let uniqueObject = [];
+    let map = new Map();
 
-// ======================================================================================
+    input.forEach(element => {
+        if (!map.has(element.name)) { // check propert through has method.... 
+            uniqueObject.push(map.set(element.name, true)) // push unique object into an array... 
+        }
+    });
 
-// function isAnagram(str1, str2) {
-//   const sortedStr1 = str1.split('').sort().join('');
-//   const sortedStr2 = str2.split('').sort().join('');
-//   return sortedStr1 === sortedStr2;
-// }
+    return uniqueObject
+}
 
-// const string1 = "AASIF"
-// const string2 = "FISAA"
-// const data = isAnagram(string1, string2)
-// console.log({ data })
+const input = [
+    { name: "sai" },
+    { name: "Nang" },
+    { name: "sai" },
+    { name: "Nang" },
+    { name: "11111" }
+];
 
-// ======================================================================================
+console.log(getUniqueObject(input))
 
-// function secondSmallest(arr) {
-//   const sortedArr = arr.sort((a, b) => a - b);
-//   return sortedArr[1];
-// }
+// [
+//   { name: "sai" },
+//   { name: "Nang" },
+//   { name: "11111" }
+// ]
 
-// var inputArray = [8, 0, 2, 3, 4, 5,];
-// const value = secondSmallest(inputArray)
-// console.log({ value })
 
-// ======================================================================================
+// isAnagram
+function isAnagram(string1, string2) {
+    if (string1.length !== string2.length) {
+        return false;
+    }
 
-// function findMaxNumber(arr) {
-//   let max = arr[0];
-//   for (let i = 1; i < arr.length; i++) {
-//     if (arr[i] > max) {
-//       max = arr[i];
-//     }
-//   }
-//   return max;
-// }
+    let frequentlyCounter1 = {}
+    let frequentlyCounter2 = {}
 
-// var inputArray = [4, 5, 8, 0, 2, 3];
-// const value = findMaxNumber(inputArray)
-// console.log({ value })
+    for (let char of string1) {
+        frequentlyCounter1[char] = (frequentlyCounter1[char] || 0) + 1;
+    }
 
-// ======================================================================================
+    for (let char of string2) {
+        frequentlyCounter2[char] = (frequentlyCounter2[char] || 0) + 1;
+    }
 
-// function sortStrings(arr) {
-//   return arr.slice().sort();
-// }
-// const stringArray = ["Apple", "Pineapple", "Aanabella", "Banana"]
-// const str = sortStrings(stringArray)
-// console.log({ str })
+    for (let key in frequentlyCounter1) {
+        if (frequentlyCounter1[key] !== frequentlyCounter2[key]) {
+            return false;
+        }
+    }
 
-// ======================================================================================
+    return true;
+}
 
-// function findSecondLargest(arr) {
-//   arr.sort((a, b) => b - a);
-//   return arr[1];
-// }
+console.log("LINE NO 194 TO 202", isAnagram("listen", "silent")) // true
+console.log("LINE NO 194 TO 196", isAnagram("hello", "bye")) // false
+console.log("LINE NO 194 TO 204", isAnagram("hello", "olleh")) // true
 
-// var inputArray = [4, 5, 8, 0, 2, 3];
-// const value = findSecondLargest(inputArray)
-// console.log({ value })
+function isAnagram1(string1, string2) {
+    return string1.split('').sort().join('') === string2.split('').sort().join('')
+}
 
-// ======================================================================================
+console.log("LINE NO 202 TO 210", isAnagram1("listen", "silent")) // true
+console.log("LINE NO 202 TO 204", isAnagram1("hello", "bye")) // false
+console.log("LINE NO 202 TO 212", isAnagram1("hello", "olleh")) // true
 
-// How do you remove an element from an array at a specific index?
+// find max number of an Array...
 
-// let arr = [1, 2, 3];
-// arr.splice(2, 1);
-// console.log(arr); // [1, 2]
+function findMaxNumber(number) {
 
-// ======================================================================================
-// console.log('hello' - 'world'); // NaN
-// console.log('hello' + 'world'); // helloworld
-// console.log('hello'.length); // 5
-// console.log('hello' === 'Hello'); // false
-// console.log('hello'.indexOf('l')); // 2
+    // step 1
+    const foundMaxNumber = Math.max(...number)
+    console.log("Found Max Number", { foundMaxNumber }) // 100
+
+    // step 2
+    let max = number[0]
+    for (i = 0; i <= number.length; i++) {
+        if (number[i] > max) {
+            max = number[i]
+        }
+    }
+    return max;
+}
+
+console.log(findMaxNumber([1, 2, 3, 90, 100, 4])) // 100
+
+// prime number
+function findPrimeNumber(number) {
+    if (number <= 2) return false;
+    for (i = 2; i < number; i++) {
+        if (number % i === 0) {
+            return false
+        }
+    }
+    return true
+}
+console.log(findPrimeNumber(6))
+
+// prime 1 to 100...
+function isPrimeNumber(num) {
+    if (num <= 2) return false
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+            return false
+        }
+    }
+    return true;
+}
+
+function printPrimes(n) {
+    for (i = 1; i <= n; i++) {
+        if (isPrimeNumber(i)) {
+            console.log("Prime numbers are : ", i)
+        }
+    }
+}
+
+printPrimes(100)
