@@ -263,3 +263,100 @@ function printPrimes(n) {
 }
 
 printPrimes(100)
+
+
+// findLargestInNestedArray 
+function findLargestInNestedArray(makeSingleArray) {
+
+    // step 1
+    // console.log(Math.max(...arrayNumbers.flat(Infinity)))
+
+    // step 2
+    // const makeSingleArray = arrayNumbers.flat(Infinity)
+
+    let max = makeSingleArray[0]
+    let maxCount = max[0]
+    for (i = 0; i <= makeSingleArray.length; i++) {
+        if (makeSingleArray[i] > max) {
+            max = makeSingleArray[i]
+
+            for (i = 0; i <= max.length; i++) {
+                if (max[i] > maxCount) {
+                    maxCount = max[i]
+                }
+            }
+        }
+    }
+
+
+    return maxCount;
+}
+
+console.log(findLargestInNestedArray([[3, 4, 58], [709, 8, 9], [10, 11], [111, 2]])) // 709
+
+function findOccurrence(string) {
+    let str = {};
+    for (let char of string) {
+        str[char] = str[char] ? str[char] + 1 : 1
+    }
+    return str;
+}
+
+console.log(findOccurrence("hello")) // { h: 1, e: 1, l: 2, o: 1 }
+
+// bubbleSortAscending
+const bubbleSortAscending = (arr) => {
+    let length = arr.length;
+
+    for (let i = 0; i < length - 1; i++) {
+        for (let j = 0; j < length - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                let temp = arr[j];
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+            }
+        }
+    }
+    return arr;
+}
+
+
+console.log(bubbleSortAscending([90, 64, 34, 25, 22, 12, 11])) // [11, 12, 22, 25, 34, 64, 90 ]
+
+// bubbleSortDescending
+const bubbleSortDescending = (arr) => {
+    let n = arr.length;
+
+    for (let i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1 - i; j++) {
+            if (arr[j] < arr[j + 1]) {
+                let temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+            }
+        }
+    }
+
+    return arr;
+}
+
+console.log(bubbleSortDescending([90, 64, 11, 34, 25, 22, 12,])) // [ 90, 64, 34, 25, 22, 12, 11 ]
+
+
+// find number of vowels and vowelsChar.... 
+const checkVowels = (string) => {
+    const vowels = "aeiouAEIOU";
+    let vowelsChar = [];
+    let count = 0;
+
+    for (let char of string) {
+        if (vowels.includes(char)) {
+            vowelsChar.push(char)
+            count++
+        }
+    }
+    return { count, vowelsChar };
+}
+
+console.log(checkVowels("Hello")) // { count: 2, vowelsChar: [ 'e', 'o' ] }
+
