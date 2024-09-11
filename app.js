@@ -342,7 +342,6 @@ const bubbleSortDescending = (arr) => {
 
 console.log(bubbleSortDescending([90, 64, 11, 34, 25, 22, 12,])) // [ 90, 64, 34, 25, 22, 12, 11 ]
 
-
 // find number of vowels and vowelsChar.... 
 const checkVowels = (string) => {
     const vowels = "aeiouAEIOU";
@@ -360,3 +359,99 @@ const checkVowels = (string) => {
 
 console.log(checkVowels("Hello")) // { count: 2, vowelsChar: [ 'e', 'o' ] }
 
+
+const sumEvenNumbers = (numbers) => {
+    return numbers.reduce((sum, num) => num % 2 === 0 ? sum + num : sum, 0)
+}
+console.log(sumEvenNumbers([1, 2, 3, 4, 5, 6])) // 12
+
+// Find second largest number of an array without using sort() and set() ... 
+function secondLargestNumber(arr) {
+    let uniqueElements = [];
+
+    for (i = 0; i < arr.length; i++) {
+        if (!uniqueElements.includes(arr[i])) {
+            uniqueElements.push(arr[i])
+        }
+    }
+
+    for (let i = 0; i < uniqueElements.length - 1; i++) {
+        for (let j = i + 1; j < uniqueElements.length; j++) {
+            if (uniqueElements[i] < uniqueElements[j]) {
+                let temp = uniqueElements[i];
+                uniqueElements[i] = uniqueElements[j];
+                uniqueElements[j] = temp;
+            }
+        }
+    }
+    return uniqueElements.length > 1 ? uniqueElements[1] : null;
+}
+
+console.log("WITHOUT SORT & SET METHOD -- ", secondLargestNumber([2, 3, 4, 4, 5, 6, 6, 7, 7, 8, 8, 11])) // 8
+
+
+// Find missing element of an array... 
+
+function findMissingElement(arr) {
+    const num = arr.length + 1
+    const expectedNum = (num * (num + 1)) / 2;
+    const value = arr.reduce((a, b) => a + b, 0)
+    return expectedNum - value
+}
+
+console.log(findMissingElement([1, 2, 3, 5])) // 4
+
+function sumDigits(n) {
+    return n.toString().split('').reduce((a, b) => Number(a) + Number(b), 0)
+}
+
+console.log("SUM OF DIGITS....", sumDigits(555)) // 15
+
+// reverseCompleteSentence... 
+function reverseCompleteSentence(sentence) {
+    const word = sentence.split('')
+    let reversedSentence = "";
+    console.log({ word })
+
+    for (let i = word.length - 1; i >= 0; i--) {
+        reversedSentence += word[i]
+        // if (i !== 0) reversedSentence += ' ';
+    }
+
+    return reversedSentence
+}
+
+console.log(reverseCompleteSentence("Hello I am Aasif Alvi from Ghaziabad")) // dabaizahG morf ivlA fisaA ma I olleH
+
+// reverse words ... 
+function reverseWords(sentence) {
+    const word = sentence.split(' ')
+    let reversedSentence = "";
+    console.log({ word })
+
+    for (let i = word.length - 1; i >= 0; i--) {
+        reversedSentence += word[i]
+        if (i !== 0) reversedSentence += ' ';
+    }
+
+    return reversedSentence
+}
+
+console.log(reverseWords("Hello I am Aasif Alvi from Ghaziabad")) // Ghaziabad from Alvi Aasif am I Hello
+
+
+// Array insertion ... 
+
+function arrayIntersection(arr1, arr2) {
+    let uniqueElements = [];
+    for (i = 0; i < arr1.length; i++) {
+        if (!uniqueElements.includes(arr1[i])) {
+            uniqueElements.push(arr1[i])
+        }
+    }
+    console.log({ uniqueElements })
+    const unique = new Set(uniqueElements)
+    return arr2.filter(item => unique.has(item))
+}
+
+console.log(arrayIntersection([1, 2, 3, 4], [3, 4, 5, 6]))
